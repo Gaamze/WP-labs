@@ -1,0 +1,93 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--</body>-->
+<!--</html>-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Event Booking page - Welcome and choose an Event</title>
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Welcome to our Event Booking App</h1>
+</header>
+<main>
+  <h2>Choose an event:</h2>
+    <form th:method="get" th:action="@{/events}">
+        <input type="text" name="searchEvent" placeholder="Search events..." />
+        <input type="number"  name="score"  />
+        <button type="submit">Search</button>
+    </form>
+<!--    <form th:method="post" th:action="@{/event-booking}">-->
+<!--  //burda anlatiri sana nasil istey guzusuk ona gore yazyasn senda hmtli-->
+  <div th:each="event : ${events}">
+<!--    // bir nevi for gibi kulleni her event idin events listadan-->
+      <input type="radio" id="rad" name="rad" th:value="${event.name}" />
+    <p>
+      Name: <th:block th:text="${event.getName()}"></th:block>,
+      Description: <th:block th:text="${event.getDescription()}"></th:block>,
+      Rating: <th:block th:text="${event.getPopularityScore()}"></th:block>
+    </p>
+
+
+      <form th:action="@{'/events/delete/{id}' (id=${event.getId()})}"
+            th:method="DELETE">
+          <button type="submit"
+                  class="btn btn-sm btn-danger delete-product">
+              <i class="fa fa-trash">Delete</i>
+          </button>
+      </form>
+
+<!--    <input type="radio" id="rad" name="rad" th:value="${event.name}" />-->
+<!---->
+      <div>
+
+
+      </div>
+
+      <div>
+          <a th:href="@{'/events/edit/' + ${event?.getId()}}" class="edit-button">
+<!--              // bu lazm sana-->
+<!--              Edit-->
+              <button type="submit"
+                      class="btn btn-sm btn-danger edit-product">
+                  <i class="fa fa-trash">Edit</i>
+              </button>
+          </a>
+      </div>
+
+  </div>
+
+    <br>
+    <br/>
+
+    <a th:href="@{'/events/add'}">
+        <button type="button" class="btn btn-sm btn-primary">
+            <i class="fa fa-plus"></i> Add Event
+        </button>
+    </a>
+  <br/>
+
+
+
+    <br>
+    <br/>
+
+
+  <input type="submit" value="Submit">
+<!--    </form>-->
+</main>
+</body>
+</html>

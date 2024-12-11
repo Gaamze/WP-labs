@@ -1,0 +1,26 @@
+#version: "3"
+#services:
+#  wp-db:
+#    image: "posgres"
+#    container_name: "wp2020_eshop"
+#    environment:
+#      - POSTGRES_USER =wp
+#      - POSTGRES_PASSWORD=wp123
+#      -   POSTGERS_DB=e-shop
+
+version: '3.8'
+services:
+  wplabs:
+    image: postgres
+    container_name: "wp_events"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: events
+      POSTGRES_USER: wp
+      POSTGRES_PASSWORD: wp123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres-data-events:
+
